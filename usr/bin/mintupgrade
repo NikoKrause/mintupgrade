@@ -242,6 +242,10 @@ class MintUpgrade():
         elif os.path.exists("/usr/share/debian-system-adjustments/systemd/adjust-grub-title"):
             os.system("sudo /usr/share/debian-system-adjustments/systemd/adjust-grub-title")
 
+        # Re-enable mintsystem
+        os.system("sudo crudini --set /etc/linuxmint/mintSystem.conf global enabled True")
+        os.system("sudo /usr/lib/linuxmint/mintsystem/mint-adjust.py")
+
         # Restore /etc/fstab if it was changed
         if not filecmp.cmp('/etc/fstab', BACKUP_FSTAB):
             os.system("cp /etc/fstab %s.upgraded" % BACKUP_FSTAB)
