@@ -228,6 +228,11 @@ class MintUpgrade():
         self.progress("Performing system adjustments")
         os.system("sudo rm -f /etc/systemd/logind.conf")
         os.system("apt install --reinstall -o Dpkg::Options::=\"--force-confmiss\" systemd")
+        os.system("sudo rm -f /etc/issue")
+        os.system("sudo rm -f /etc/issue.net")
+        os.system("sudo rm -f /etc/lsb-release")
+        os.system("sudo rm -f /etc/os-release")
+        os.system("apt install --reinstall -o Dpkg::Options::=\"--force-confmiss\" base-files")
         os.system("sudo rm -f /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla")
         if os.path.exists("/usr/share/ubuntu-system-adjustments/systemd/adjust-grub-title"):
             os.system("sudo /usr/share/ubuntu-system-adjustments/systemd/adjust-grub-title")
